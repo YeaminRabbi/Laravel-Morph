@@ -8,6 +8,7 @@ use App\Models\Post;
 use App\Models\Video;
 use App\Models\Image;
 use App\Models\Comment;
+use App\Models\Tag;
 
 
 use Faker\Generator;
@@ -40,7 +41,7 @@ class ApiController extends Controller
 
     function postlist()
     {
-        $collection = Post::query()->with('image','comments')->get();
+        $collection = Post::query()->with('image','comments','tags')->get();
         return response([
             'data' => $collection 
         ]);
@@ -48,10 +49,18 @@ class ApiController extends Controller
 
     function videolist()
     {
-        $collection = Video::query()->with('comments')->get();
+        $collection = Video::query()->with('comments','tags')->get();
         return response([
             'data' => $collection 
-        ]);-
+        ]);
+    }
+
+    function commentlist()
+    {
+        $collection = Comment::query()->with('commentable')->get();
+        return response([
+            'data' => $collection 
+        ]);
     }
 
 
@@ -92,6 +101,17 @@ class ApiController extends Controller
          
         //     $video->comments()->create(['body'=>Str::random(50)]);
         // }
+
+        
+        for($i=1; $i<=$limit;$i++)
+        {
+           $post = Post::all()->random();
+           $post->tags()->create(['name'=>Str::random(7)]);
+
+           $videos = Video::all()->random();
+           $videos->tags()->create(['name'=>Str::random(7)]);
+
+        }
        
 
         return response([

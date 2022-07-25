@@ -20,6 +20,8 @@ Route::get('users', [ApiController::class,'userlist']);
 Route::get('images', [ApiController::class,'imagelist']);
 Route::get('posts', [ApiController::class,'postlist']);
 Route::get('videos', [ApiController::class,'videolist']);
+Route::get('comments', [ApiController::class,'commentlist']);
+Route::get('tags', [ApiController::class,'taglist']);
 
 
 

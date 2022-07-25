@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Image;
 use App\Models\Comment;
+use App\Models\Tag;
 class Post extends Model
 {
     use HasFactory;
@@ -20,5 +21,10 @@ class Post extends Model
     function comments()
     {
         return $this->morphMany(Comment::class, 'commentable');
+    }
+
+    function tags()
+    {
+        return $this->morphToMany(Tag::class, 'taggable');
     }
 }

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 use App\Models\Comment;
+use App\Models\Tag;
 
 class Video extends Model
 {
@@ -17,4 +18,8 @@ class Video extends Model
         return $this->morphMany(Comment::class, 'commentable');
     }
 
+    function tags()
+    {
+        return $this->morphToMany(Tag::class, 'taggable');
+    }
 }
