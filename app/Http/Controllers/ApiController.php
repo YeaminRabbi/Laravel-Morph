@@ -40,11 +40,21 @@ class ApiController extends Controller
 
     function postlist()
     {
-        $collection = Post::query()->with("image")->get();
+        $collection = Post::query()->with('image','comments')->get();
         return response([
             'data' => $collection 
         ]);
     }
+
+    function videolist()
+    {
+        $collection = Video::query()->with('comments')->get();
+        return response([
+            'data' => $collection 
+        ]);-
+    }
+
+
     function populate()
     {
         $limit = 10;
@@ -55,7 +65,8 @@ class ApiController extends Controller
         //     $post->body = Str::random(50);
         //     $post->save();
     
-        //     $post->image()->create(['url'=>'site/image.png']);
+        //     $post->image()->create(['url'=>'site/'.Str::random(5)]);
+        //     $post->comments()->create(['body'=>Str::random(50)]);
         // }
 
        
@@ -71,6 +82,16 @@ class ApiController extends Controller
            
         // }
 
+
+        // for($i=1; $i<=$limit;$i++)
+        // {
+        //     $video = new Video;
+        //     $video->url = 'site/videos/'.Str::random(50);
+        //     $video->save();
+    
+         
+        //     $video->comments()->create(['body'=>Str::random(50)]);
+        // }
        
 
         return response([
