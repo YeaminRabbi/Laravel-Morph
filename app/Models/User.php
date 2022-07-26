@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Image;
+use App\Models\Book;
 
 class User extends Authenticatable
 {
@@ -49,5 +50,10 @@ class User extends Authenticatable
     function image()
     {
         return $this->morphOne(Image::class, 'imageable');
+    }
+
+    public function books()
+    {
+      return $this->hasMany(Book::class);
     }
 }

@@ -1,9 +1,11 @@
 <?php
 
-use App\Http\Controllers\ApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\ApiController;
+use App\Http\Controllers\BookController;
+use App\Http\Controllers\RatingController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -24,5 +26,10 @@ Route::get('comments', [ApiController::class,'commentlist']);
 Route::get('tags', [ApiController::class,'taglist']);
 
 
+Route::get('books', [ApiController::class, 'booklist']);
 
 Route::get('populate', [ApiController::class,'populate']);
+
+//With Resources
+Route::get('r/posts', [ApiController::class,'postlist_r']);
+Route::get('r/images', [ApiController::class,'imagelist_r']);
