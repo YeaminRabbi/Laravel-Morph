@@ -4,7 +4,9 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use App\Models\Video;
 
+use Illuminate\Support\Str;
 class Kernel extends ConsoleKernel
 {
     /**
@@ -15,7 +17,12 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->call(function () {
+            $data = new Video();
+            $data->url = Str::random(5);
+            $data->save();
+            
+        })->everyMinute();
     }
 
     /**
